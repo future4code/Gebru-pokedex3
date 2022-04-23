@@ -14,11 +14,11 @@ export const PokemonDetails = () => {
     
 
     axios
-        .get(`https://pokeapi.co/api/v2/pokemon/pikachu`)
+        .get(`https://pokeapi.co/api/v2/pokemon/${params.pokemon}`)
         .then((res) => setSelectPokemon(res.data))
         .catch((err) => console.log(err.response.message));
 
-        console.log(selectPokemon)
+        console.log(params)
 
 
  
