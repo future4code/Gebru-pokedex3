@@ -7,7 +7,7 @@ export const goToPokedex= (navigate) => {
      
   }
   
-export const goToPokemonDetail = (navigate) => {
-    navigate("/pokemon/detalhes");
+export const goToPokemonDetail = (navigate, pokemon) => {
+    navigate(`/pokemon/detalhes/${pokemon}`);
   }
   
