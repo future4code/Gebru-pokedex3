@@ -1,52 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { DivComponent } from "./styled";
 import {goToPokedex} from "../../routes/Coordinator"
 import { useNavigate } from "react-router-dom";
-import Img1 from "./buba1.png"
-import Img2 from "./buba2.png"
 import "./index.css"
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export const PokemonDetails = () => {
     const params = useParams()
    
     const navigate = useNavigate()
+    const [selectPokemon, setSelectPokemon] = useState()
+    
+
+    axios
+        .get(`https://pokeapi.co/api/v2/pokemon/pikachu`)
+        .then((res) => setSelectPokemon(res.data))
+        .catch((err) => console.log(err.response.message));
+
+        console.log(selectPokemon)
+
+
  
-    return <main class="container">
-    <div class="container-card">
-      <div class="first-container">
-           <img src={Img2}/>
-           <img src={Img1}/>
+    return <main className="container">
+    <div className="container-card">
+      <div className="first-container">
+         {selectPokemon && <img src={selectPokemon.sprites.front_default}/>}  
+         {selectPokemon && <img src={selectPokemon.sprites.back_default}/>}
       </div>
       <div class="two-container-child">
-           <h1>buba</h1>
+           {selectPokemon && <h1>{selectPokemon.name}</h1>} 
            <h2>tipo:</h2>
         <div>
-           <p>grass</p>
-           <p>poison</p>
+        {selectPokemon && selectPokemon.types.map((tipo) => {
+     
+        return <p key={tipo.type.name}>{tipo.type.name}</p>;
+            
+})}
         </div>
       </div>
-      <div class="thre-container-child">
+      <div className="thre-container-child">
            
                <h2>Poderes:</h2>               
            
            <div>
-                <p>hp: 60</p>
-                <p>attack: 62</p>
-                <p>defense: 63</p>
-                <p>special-attack: 80</p>
-                <p>special-defense: 80</p>
-                <p>speed: 60</p>
+           {selectPokemon && selectPokemon.stats.map((poderes) => {
+                return (
+                  <p>
+                    {poderes.stat.name}: {poderes.base_stat}
+                  </p>
+                );
+              })}
            </div>
       </div>
-      <div class="for-container-child">
+      <div className="for-container-child">
          <h2>Principais ataques:</h2>
          <div>
-           <p> swords-dance</p> 
-           <p> cut</p> 
-           <p> bind</p> 
-           <p> vine-whip</p> 
-           <p> headbutt</p> 
+         {selectPokemon && selectPokemon.moves.map((ataque) => {
+                  return (
+                   <p >{ataque.move.name}</p>
+                  );
+                })}
         </div>
       </div>
       <div className="button">
