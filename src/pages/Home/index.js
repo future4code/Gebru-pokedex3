@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Button, CardContainer, CardFoto, HeaderContainer, FormContainer} from "./styled";
 import axios from "axios";
 
-
 export const Home = () => {
     const navigate = useNavigate()
-
     const [pokemons, setPokemons] = useState()
+    const [addPokenos, setAddPokenos] = useState()
 
   useEffect(() => {
     const list = [];
@@ -25,6 +24,11 @@ export const Home = () => {
     }
   }, [])
 
+  const addPokemonToPokedex = (newPoke) =>{
+    setAddPokenos (newPoke)
+  }
+  console.log(addPokenos)
+
   const details =
     pokemons &&
     pokemons.map((pokemon) => {
@@ -34,15 +38,13 @@ export const Home = () => {
             <img src={pokemon.sprites.front_default} alt="" />
           </CardFoto>
           <h2>{pokemon.name}</h2>
-          <Button >Adicionar a Pokédex</Button>
-          <Button onClick={() => goToPokemonDetail(navigate, pokemon.name)}>Ver Detalhes</Button>
+          <Button onClick={ ()=> addPokemonToPokedex(pokemon.name)} >Adicionar a Pokédex</Button>
+          <Button onClick={ () => goToPokemonDetail(navigate, pokemon.name)}>Ver Detalhes</Button>
         </CardContainer>
       );
     });
 
-
-    return (<>
-     
+    return (<> 
     <div>
       <HeaderContainer>
         <Button onClick={() => goToPokedex(navigate)}>Ir para pokedex</Button>
@@ -50,8 +52,5 @@ export const Home = () => {
       </HeaderContainer>
       <FormContainer>{details}</FormContainer>
     </div>
-    
-    
     </>)
-
 }

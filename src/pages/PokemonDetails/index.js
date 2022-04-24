@@ -18,7 +18,7 @@ export const PokemonDetails = () => {
         .then((res) => setSelectPokemon(res.data))
         .catch((err) => console.log(err.response.message));
 
-        console.log(params)
+        // console.log(params)
 
 
  
