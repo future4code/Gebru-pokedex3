@@ -22,10 +22,12 @@
 .first-container{
   display: flex;
 }
+
 h2 {
     margin: 5px;
     color: white;
 }
+
 .first-container img{
     width: 10em; 
 }
