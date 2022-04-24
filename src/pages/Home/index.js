@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {goToPokedex, goToPokemonDetail} from "../../routes/Coordinator"
 import { useNavigate } from "react-router-dom";
-import { Button, CardContainer, CardFoto, HeaderContainer } from "./styled";
+import { Button, CardContainer, CardFoto, HeaderContainer, FormContainer} from "./styled";
+import axios from "axios";
 
 
 export const Home = () => {
@@ -34,15 +35,14 @@ export const Home = () => {
           </CardFoto>
           <h2>{pokemon.name}</h2>
           <Button >Adicionar a Pokédex</Button>
-          <Button onClick={() => goToPokemonDetail(navigate)}>Ver Detalhes</Button>
+          <Button onClick={() => goToPokemonDetail(navigate, pokemon.name)}>Ver Detalhes</Button>
         </CardContainer>
       );
     });
 
 
     return (<>
-    
-    <h1>Home</h1>   
+     
     <div>
       <HeaderContainer>
         <Button onClick={() => goToPokedex(navigate)}>Ir para pokedex</Button>
