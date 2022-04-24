@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useContext } from 'react'
 import { goToPokedex, goToPokemonDetail } from '../../routes/Coordinator'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +16,7 @@ export const Home = () => {
   const navigate = useNavigate()
   const [pokemons, setPokemons] = useState()
   const { cart, setCart } = useContext(PokemonsList)
+
 
   useEffect(() => {
     const list = []
@@ -45,6 +47,7 @@ export const Home = () => {
             <img src={pokemon.sprites.front_default} alt='' />
           </CardFoto>
           <h2>{pokemon.name}</h2>
+
           <Button onClick={() => addPokedex(pokemon)}>
             Adicionar a Pokédex
           </Button>
